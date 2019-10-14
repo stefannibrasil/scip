@@ -86,41 +86,19 @@ a)
 (define (square x) (* x x))
 
 (define (sum-of-squares x y)
-(+ (square x)(square y))
-)
+  (+ (square x)(square y)))
 
-(define (larger-number x y)
-(if (> x y) x y)
-)
+(define (sum-of-the-square-two-largest-numbers x y z)
+  (apply sum-of-squares (two-largest-numbers x y z)))
 
-(define (larger-number-from-three x y z)
-(if (> x y) (if (> x z) x z) (if (> y z) y z)
-)
-)
-
-(define (second-larger-number x y z)
-(cond
-((= (larger-number-from-three x y z) x) (larger-number y z))
-((= (larger-number-from-three x y z) y) (larger-number x z))
-(larger-number x y)
-)
-)
-
-(define (sum-of-the-square-of-the-two-larger-numbers x y z)
-(sum-of-squares (larger-number-from-three x y z)(second-larger-number x y z)))
-
-; (sum-of-the-square-of-the-two-larger-numbers 1 5 9)
-; 106
-
-; (sum-of-the-square-of-the-two-larger-numbers 2 5 -1)
-; 29
-
-; (sum-of-the-square-of-the-two-larger-numbers 2 3 1)
-; 13
-; (sum-of-the-square-of-the-two-larger-numbers 10 1 9)
-; 181
-
-;(sum-of-the-square-of-the-two-larger-numbers 10 12 9)
+(define (two-largest-numbers x y z)
+  (if (> x y)
+      (if (> y z)
+          (list x y)
+          (list x z))
+      (if (> y z)
+          (list x y)
+          (list y z))))
 
 ;;; Exercise 1.4 - Observe that our model of evaluation allows for combinations whose
 ;;; operators are compound expressions.
